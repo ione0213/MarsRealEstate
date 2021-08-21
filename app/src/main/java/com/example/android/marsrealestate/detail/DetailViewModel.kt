@@ -46,12 +46,12 @@ class DetailViewModel(marsProperty: MarsProperty, app: Application) : AndroidVie
     }
 
     val displayPropertyType = Transformations.map(selectedProperty) {
-        app.applicationContext.getString(
-            when (it.isRental) {
-                true -> R.string.type_rent
-                false -> R.string.type_sale
-            }
-        )
+        app.applicationContext.getString(R.string.display_type,
+            app.applicationContext.getString(
+                when(it.isRental) {
+                    true -> R.string.type_rent
+                    false -> R.string.type_sale
+                }))
     }
 
 }

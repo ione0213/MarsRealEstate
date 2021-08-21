@@ -20,18 +20,55 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="property"
             type="com.example.android.marsrealestate.network.MarsProperty" />
     </data>
-    <ImageView
-        android:id="@+id/mars_image"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:padding="2dp"
-        tools:src="@tools:sample/backgrounds/scenic"
-        app:imageUrl="@{property.imgSrcUrl}"/>
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/mars_image"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{property.imgSrcUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/mars_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="10dp"
+            android:textColor="#de000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mars_image"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:marsType="@{property}"
+            tools:text="To Rent" />
+
+        <TextView
+            android:id="@+id/mars_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#de000000"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/mars_type"
+            app:layout_constraintTop_toBottomOf="@+id/mars_type"
+            app:marsPrice="@{property}"
+            tools:text="$100,000" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

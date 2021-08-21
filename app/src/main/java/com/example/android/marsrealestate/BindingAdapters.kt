@@ -19,8 +19,10 @@ package com.example.android.marsrealestate
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.Transformations
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -31,7 +33,7 @@ import com.example.android.marsrealestate.overview.MarsApiStatus
 import com.example.android.marsrealestate.overview.PhotoGridAdapter
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?){
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
     val adapter = recyclerView.adapter as PhotoGridAdapter
     adapter.submitList(data)
 }
@@ -66,4 +68,27 @@ fun bindStatus(statusImage: ImageView, status: MarsApiStatus?) {
             statusImage.visibility = View.GONE
         }
     }
+}
+
+@BindingAdapter("marsType")
+fun TextView.bingType(item: MarsProperty) {
+    text = context.getString(
+        R.string.display_type,
+        context.getString(
+            when (item.isRental) {
+                true -> R.string.type_rent
+                false -> R.string.type_sale
+            }
+        )
+    )
+}
+
+@BindingAdapter("marsPrice")
+fun TextView.bindPrice(item: MarsProperty) {
+    text = context.getString(
+        when (item.isRental) {
+            true -> R.string.display_price_monthly_rental
+            false -> R.string.display_price
+        }, item.price
+    )
 }
